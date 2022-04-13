@@ -1,1 +1,1 @@
-from .animal_requests import get_all_animals
+from ..animals.animal_requests import get_all_animals
