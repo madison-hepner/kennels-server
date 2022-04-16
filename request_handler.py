@@ -1,5 +1,6 @@
+"""this goes here"""
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_animals, get_single_animal
+from views import get_all_animals, get_single_animal, get_all_locations, get_single_location
 # Here's a class. It inherits from another class.
 # For now, think of a class as a container for functions that
 # work together for a common purpose. In this case, that
@@ -7,6 +8,10 @@ from views import get_all_animals, get_single_animal
 
 
 class HandleRequests(BaseHTTPRequestHandler):
+
+    """Controls the functionality of any GET, PUT, POST, DELETE requests to the server
+    """
+
     def parse_url(self, path):
         # Just like splitting a string in JavaScript. If the
         # path is "/animals/1", the resulting list will
@@ -73,6 +78,14 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             else:
                 response = f"{get_all_animals()}"
+
+
+        if resource == "locations":
+            if id is not None:
+                response = f"{get_single_location(id)}"
+
+            else:
+                response = f"{get_all_locations()}"
 
         self.wfile.write(response.encode())
     # Here's a method on the class that overrides the parent's method.
