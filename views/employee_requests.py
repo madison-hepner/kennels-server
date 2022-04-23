@@ -2,21 +2,25 @@ EMPLOYEES = [
     {
         "id": 1,
         "name": "Davey",
+        "status": "Active",
         "locationId": 2
     },
     {
         "id": 2,
         "name": "Dan",
+        "status": "Active",
         "locationId": 1
     },
     {
         "id": 3,
         "name": "Paul",
+        "status": "Active",
         "locationId": 3
     },
     {
         "id": 4,
         "name": "Dana",
+        "status": "Active",
         "locationId": 1
     }
 ]
@@ -60,3 +64,17 @@ def create_employee(employee):
     return employee
 
 
+def delete_employee(id):
+    # Initial -1 value for animal index, in case one isn't found
+    employee_index = -1
+
+    # Iterate the ANIMALS list, but use enumerate() so that you
+    # can access the index value of each item
+    for index, employee in enumerate(EMPLOYEES):
+        if employee["id"] == id:
+            # Found the animal. Store the current index.
+            employee_index = index
+
+    # If the animal was found, use pop(int) to remove it from list
+    if employee_index >= 0:
+        EMPLOYEES.pop(employee_index)
