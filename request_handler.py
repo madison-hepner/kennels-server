@@ -2,7 +2,7 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from views import get_all_animals, get_single_animal, get_all_locations, get_single_location, create_location, get_all_employees, get_single_employee, create_employee, get_single_customer, get_all_customers, create_customer, create_animal
-from views import delete_animal, delete_location, update_animal, delete_employee, delete_customer
+from views import delete_animal, delete_location, update_animal, delete_employee, delete_customer, update_customer, update_employee, update_location
 # Here's a class. It inherits from another class.
 # For now, think of a class as a container for functions that
 # work together for a common purpose. In this case, that
@@ -170,6 +170,24 @@ class HandleRequests(BaseHTTPRequestHandler):
     # Delete a single animal from the list
         if resource == "animals":
             update_animal(id, post_body)
+
+    # Encode the new animal and send in response
+        self.wfile.write("".encode())
+
+        if resource == "locations":
+            update_location(id, post_body)
+
+    # Encode the new animal and send in response
+        self.wfile.write("".encode())
+
+        if resource == "customers":
+            update_customer(id, post_body)
+
+    # Encode the new animal and send in response
+        self.wfile.write("".encode())
+
+        if resource == "employees":
+            update_employee(id, post_body)
 
     # Encode the new animal and send in response
         self.wfile.write("".encode())
