@@ -83,6 +83,16 @@ def create_animal(animal):
 #     if animal_index >= 0:
 #         ANIMALS.pop(animal_index)
 
+# def delete_animal(id):
+#     with sqlite3.connect("./kennel.sqlite3") as conn:
+#         db_cursor = conn.cursor()
+
+#         db_cursor.execute("""
+#         DELETE FROM animal
+#         WHERE id = ?
+#         """, (id, ))
+
+
 def delete_animal(id):
     with sqlite3.connect("./kennel.sqlite3") as conn:
         db_cursor = conn.cursor()
@@ -91,6 +101,7 @@ def delete_animal(id):
         DELETE FROM animal
         WHERE id = ?
         """, (id, ))
+
 
 
 def update_animal(id, new_animal):
