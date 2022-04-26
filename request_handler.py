@@ -3,6 +3,8 @@ import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from views import get_all_animals, get_single_animal, get_all_locations, get_single_location, create_location, get_all_employees, get_single_employee, create_employee, get_single_customer, get_all_customers, create_customer, create_animal
 from views import delete_animal, delete_location, update_animal, delete_employee, delete_customer, update_customer, update_employee, update_location, get_customers_by_email
+from views import get_animals_by_location, get_employees_by_location
+from views.animal_requests import get_animals_by_status
 # Here's a class. It inherits from another class.
 # For now, think of a class as a container for functions that
 # work together for a common purpose. In this case, that
@@ -120,6 +122,15 @@ class HandleRequests(BaseHTTPRequestHandler):
             # email as a filtering value?
             if key == "email" and resource == "customers":
                 response = get_customers_by_email(value)
+
+            if key == "location_id" and resource == "animals":
+                response = get_animals_by_location(value)
+
+            if key == "location_id" and resource == "employees":
+                response = get_employees_by_location(value)
+
+            if key == "status" and resource == "animals":
+                response = get_animals_by_status(value)
 
         self.wfile.write(response.encode())
     # Here's a method on the class that overrides the parent's method.
