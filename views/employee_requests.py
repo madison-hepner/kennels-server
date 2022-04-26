@@ -6,25 +6,25 @@ EMPLOYEES = [
     {
         "id": 1,
         "name": "Davey",
-        "status": "Active",
+        "address": "Active",
         "locationId": 2
     },
     {
         "id": 2,
         "name": "Dan",
-        "status": "Active",
+        "address": "Active",
         "locationId": 1
     },
     {
         "id": 3,
         "name": "Paul",
-        "status": "Active",
+        "address": "Active",
         "locationId": 3
     },
     {
         "id": 4,
         "name": "Dana",
-        "status": "Active",
+        "address": "Active",
         "locationId": 1
     }
 ]
@@ -107,8 +107,8 @@ def get_all_employees():
         SELECT
             a.id,
             a.name,
-            a.status,
-            a.location_id,
+            a.address,
+            a.location_id
         FROM employee a
         """)
 
@@ -125,7 +125,7 @@ def get_all_employees():
             # Note that the database fields are specified in
             # exact order of the parameters defined in the
             # Animal class above.
-            employee = Employee(row['id'], row['name'], row['status'],
+            employee = Employee(row['id'], row['name'], row['address'],
                                 row['location_id'])
 
             employees.append(employee.__dict__)
@@ -145,8 +145,8 @@ def get_single_employee(id):
         SELECT
             a.id,
             a.name,
-            a.status,
-            a.location_id,
+            a.address,
+            a.location_id
         FROM employee a
         WHERE a.id = ?
         """, (id, ))
@@ -156,6 +156,6 @@ def get_single_employee(id):
 
         # Create an animal instance from the current row
         employee = Employee(data['id'], data['name'],
-                            data['status'], data['location_id'])
+                            data['address'], data['location_id'])
 
         return json.dumps(employee.__dict__)

@@ -126,8 +126,8 @@ def get_all_customers():
             a.id,
             a.name,
             a.address,
-            a.status,
             a.email,
+            a.password
         FROM customer a
         """)
 
@@ -144,8 +144,8 @@ def get_all_customers():
             # Note that the database fields are specified in
             # exact order of the parameters defined in the
             # Animal class above.
-            customer = Customer(row['id'], row['name'], row['address'],
-                                row['status'], row['email'])
+            customer = Customer(
+                row['id'], row['name'], row['address'], row['email'], row['password'])
 
             customers.append(customer.__dict__)
 
@@ -165,8 +165,8 @@ def get_single_customer(id):
             a.id,
             a.name,
             a.address,
-            a.status,
             a.email,
+            a.password
         FROM customer a
         WHERE a.id = ?
         """, (id, ))
@@ -175,8 +175,8 @@ def get_single_customer(id):
         data = db_cursor.fetchone()
 
         # Create an animal instance from the current row
-        customer = Customer(data['id'], data['name'], data['address'],
-                            data['status'], data['email'])
+        customer = Customer(data['id'], data['name'],
+                            data['address'], data['email'], data['password'])
 
         return json.dumps(customer.__dict__)
 
@@ -197,13 +197,14 @@ def get_customers_by_email(email):
             c.password
         from Customer c
         WHERE c.email = ?
-        """, ( email, ))
+        """, (email, ))
 
         customers = []
         dataset = db_cursor.fetchall()
 
         for row in dataset:
-            customer = Customer(row['id'], row['name'], row['address'], row['email'] , row['password'])
+            customer = Customer(
+                row['id'], row['name'], row['address'], row['email'], row['password'])
             customers.append(customer.__dict__)
 
     return json.dumps(customers)
